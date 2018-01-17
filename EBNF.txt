@@ -1,0 +1,38 @@
+Class		= "public" "class" Identifier "{" ClassBody "}" "EOF".
+ClassBody 	= {VarDec} {MethodDec}.
+VarDec		= {(PrimDec | RecDec)}.
+PrimDec		= Type ["[" "]"] Identifier ";".
+Type 		= "int" | "boolean" | "char" | RecType.
+RecDec		= "class" Identifier "{" {PrimDec} "}".
+MethodDec 	= "public" ("void" | Type ["[" "]"]) Identifier 
+			  "(" Param ")" "{" {PrimDec} {Statement} "}".
+Statement 	= "System" "." "out" "." "println" "(" Expression
+			  ["+" Expression] ")" ";"
+			 | Assignment ";"
+			 | Identifier "=" Expression ";"
+			 | ProcCall ";"
+			 | "while" "(" Expression ")" (Statement | StatemSeq)
+			 | "if" "(" Expression ")" (Statement | StatemSeq) 
+			   ["else" (Statement | StatemSeq)]
+			 | "return" [Expression] ";".
+Assignment 	= Identifier [{("[" Expression "]" | "." 
+			  Identifier)}] "=" (Allocation | Expression).
+Allocation	= "new" Type ("(" ")" | "[" Expression "]").
+StatemSeq	= "{" {Statement} "}".
+Param		= Type ["[" "]"] Identifier [{"," Type 
+			  ["[" "]"] Identifier}].
+Expression	= ["-" Term] { ("+" | "-" | "==" | ">" 
+			  | "<" | ">=" | "<=" | "||") Term.
+Term		= Factor {("*" | "/" | "&&") Factor}.
+Factor		= ProcCall
+			 | Identifier | Number
+			 | "(" Expression ")"
+			 | "!" Expression
+			 | "true"
+			 | "false".
+ProcCall	= Identifier "." Identifier "(" [Expression 
+			  [{"," Expression}]] ")".				
+Identifier	= Letter [{Letter | Digit}].
+Number		= ["-"] Digit {Digit}.
+Letter		= "a" | "b" | ... | "z" | "A" | "B" | ... | "Z".
+Digit		= "0" | "1" | ... | "9".
