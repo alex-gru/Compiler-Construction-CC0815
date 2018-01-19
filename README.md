@@ -2,7 +2,7 @@
 A Java compiler, implemented from scratch. 
 
 This project was realized during the class on [Compiler Construction](http://cksystemsteaching.github.io/CC-Summer-2013/), 
-held by [Christoph Kirsch](http://cs.uni-salzburg.at/~ck/).
+held by [Christoph Kirsch](http://cs.uni-salzburg.at/~ck/) in 2013.
 
 [CC0815.java](CC0815.java) is the compiler itself, the EBNF grammar is described in [EBNF.txt](EBNF.txt). 
 
